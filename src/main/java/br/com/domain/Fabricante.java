@@ -1,9 +1,24 @@
 package br.com.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "fabricante")
 public class Fabricante {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
 	private String descricao;
+
+	public Fabricante(String descricao) {
+
+		this.descricao = descricao;
+	}
 
 	public Long getCodigo() {
 		return codigo;
