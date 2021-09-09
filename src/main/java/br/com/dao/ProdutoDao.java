@@ -4,21 +4,18 @@ import javax.persistence.EntityManager;
 
 import br.com.domain.Produto;
 
-public class Dao {
+public class ProdutoDao {
 
 	private EntityManager em;
 
-	public Dao(EntityManager em) {
+	public ProdutoDao(EntityManager em) {
 
 		this.em = em;
 	}
 
 	public void cadastrar(Produto produto) {
 
-		em.getTransaction().begin();
 		em.persist(produto);
-		em.getTransaction().commit();
-		em.close();
 	}
 
 }

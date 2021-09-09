@@ -11,15 +11,16 @@ public class Program {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		Fabricante f = new Fabricante("SAO LUIZ");
+		Fabricante f = new Fabricante("GUARÁ");
+		Produto p = new Produto("NOVO", 7l, 300.0, f);
 
-		Produto p = new Produto(1l, "Lançamento", 5l, 20.0);
-
-		EntityManager em = new JPAUtil().getEntityManager();
-		Dao dao = new Dao(em);
+		EntityManager em = JPAUtil.getEntityManager();
+		ProdutoDao produtoDao = new ProdutoDao(em);
+		FabricanteDao fabricanteDao = new FabricanteDao(em);
 
 		em.getTransaction().begin();
-		dao.cadastrar(p);
+		fabricanteDao.cadastrar(f);
+		produtoDao.cadastrar(p);
 		em.getTransaction().commit();
 		em.close();
 

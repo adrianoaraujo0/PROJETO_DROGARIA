@@ -1,11 +1,11 @@
 package br.com.domain;
 
-import java.math.BigDecimal;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -19,10 +19,16 @@ public class Produto {
 	private Long quantidade;
 	private Double preco;
 
-	
+	@ManyToOne
+	@JoinColumn(name = "fabricante_produto")
+	Fabricante fabricante;
 
-	public Produto(Long codigo, String descricao, Long quantidade, Double preco) {
-		this.codigo = codigo;
+	public Produto() {
+
+	}
+
+	public Produto(String descricao, Long quantidade, Double preco, Fabricante fabricante) {
+		this.fabricante = fabricante;
 		this.descricao = descricao;
 		this.quantidade = quantidade;
 		this.preco = preco;
@@ -60,5 +66,12 @@ public class Produto {
 		this.preco = preco;
 	}
 
-	
+	public Fabricante getFabricante() {
+		return fabricante;
+	}
+
+	public void setFabricante(Fabricante fabricante) {
+		this.fabricante = fabricante;
+	}
+
 }
