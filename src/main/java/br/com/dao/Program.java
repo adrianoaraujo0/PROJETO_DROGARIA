@@ -20,7 +20,7 @@ public class Program {
 
 		em.getTransaction().begin();
 		Produto produto = em.find(Produto.class, 4l);
-		produtoDao.remover(produto);
+		
 		em.getTransaction().commit();
 		em.close();
 
