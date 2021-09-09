@@ -18,4 +18,8 @@ public class FabricanteDao {
 		em.persist(fabricante);
 	}
 
+	public void remover(Fabricante fabricante) {
+		fabricante = em.merge(fabricante);
+		this.em.remove(fabricante);
+	}
 }

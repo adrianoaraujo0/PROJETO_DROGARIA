@@ -11,7 +11,7 @@ public class Program {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		Fabricante f = new Fabricante("GUARÁ");
+		Fabricante f = new Fabricante();
 		Produto p = new Produto("NOVO", 7l, 300.0, f);
 
 		EntityManager em = JPAUtil.getEntityManager();
@@ -19,8 +19,8 @@ public class Program {
 		FabricanteDao fabricanteDao = new FabricanteDao(em);
 
 		em.getTransaction().begin();
-		fabricanteDao.cadastrar(f);
-		produtoDao.cadastrar(p);
+		Fabricante fabricante = em.find(Fabricante.class, 5l);
+		fabricanteDao.remover(f);
 		em.getTransaction().commit();
 		em.close();
 
