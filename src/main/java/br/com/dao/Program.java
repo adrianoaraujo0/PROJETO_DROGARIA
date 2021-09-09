@@ -19,8 +19,8 @@ public class Program {
 		FabricanteDao fabricanteDao = new FabricanteDao(em);
 
 		em.getTransaction().begin();
-		Fabricante fabricante = em.find(Fabricante.class, 5l);
-		fabricanteDao.remover(f);
+		Produto produto = em.find(Produto.class, 4l);
+		produtoDao.remover(produto);
 		em.getTransaction().commit();
 		em.close();
 
