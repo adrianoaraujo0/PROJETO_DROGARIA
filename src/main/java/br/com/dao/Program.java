@@ -1,5 +1,7 @@
 package br.com.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 
 import br.com.domain.Fabricante;
@@ -19,11 +21,8 @@ public class Program {
 		FabricanteDao fabricanteDao = new FabricanteDao(em);
 
 		em.getTransaction().begin();
-		Produto produto = produtoDao.buscarProduto(7l);
-
-		Fabricante fabricante = fabricanteDao.buscarFabricante(7l);
-
-		System.out.println(produto.getPreco() + ", " + produto.getQuantidade() + ", " + fabricante.getDescricao());
+		List<Produto> buscarTodos = produtoDao.buscarTodos();
+		buscarTodos.forEach(p2 -> System.out.println(p.getPreco()));
 		em.getTransaction().commit();
 		em.close();
 

@@ -1,5 +1,7 @@
 package br.com.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 
 import br.com.domain.Produto;
@@ -25,7 +27,12 @@ public class ProdutoDao {
 	public Produto buscarProduto(Long id) {
 
 		return em.find(Produto.class, id);
-		
+
+	}
+
+	public List<Produto> buscarTodos() {
+		String jpql = "SELECT p FROM Produto p";
+		return em.createQuery(jpql, Produto.class).getResultList();
 	}
 
 }
