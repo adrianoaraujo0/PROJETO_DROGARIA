@@ -22,4 +22,8 @@ public class FabricanteDao {
 		fabricante = em.merge(fabricante);
 		this.em.remove(fabricante);
 	}
+
+	public Fabricante buscarFabricante(Long id) {
+		return em.find(Fabricante.class, id);
+	}
 }

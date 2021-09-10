@@ -22,4 +22,10 @@ public class ProdutoDao {
 		this.em.remove(produto);
 	}
 
+	public Produto buscarProduto(Long id) {
+
+		return em.find(Produto.class, id);
+		
+	}
+
 }

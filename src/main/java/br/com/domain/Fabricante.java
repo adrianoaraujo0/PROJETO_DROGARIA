@@ -43,4 +43,5 @@ public class Fabricante {
 		this.descricao = descricao;
 	}
 
+	
 }
