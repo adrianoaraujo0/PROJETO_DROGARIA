@@ -1,8 +1,11 @@
 package br.com.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 
 import br.com.domain.Fabricante;
+import br.com.domain.Produto;
 
 public class FabricanteDao {
 
@@ -23,7 +26,18 @@ public class FabricanteDao {
 		this.em.remove(fabricante);
 	}
 
-	public Fabricante buscarFabricante(Long id) {
+	public Fabricante buscarPorId(Long id) {
 		return em.find(Fabricante.class, id);
 	}
+	
+	public List<Fabricante> buscarPorNome(String nome) {
+		String jpql = "SELECT p FROM Fabricante p WHERE p.nome = :nome";
+		return em.createQuery(jpql, Fabricante.class)
+				.setParameter("nome", nome)
+				.getResultList();
+
+	}
+
+	
+	
 }

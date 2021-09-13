@@ -14,15 +14,16 @@ public class Program {
 		// TODO Auto-generated method stub
 
 		Fabricante f = new Fabricante("GUARÁ");
-		Produto p = new Produto("Velho", 250l, 300.0, f);
+		Produto p = new Produto("Novo", 250l, 300.0, f);
 
 		EntityManager em = JPAUtil.getEntityManager();
 		ProdutoDao produtoDao = new ProdutoDao(em);
 		FabricanteDao fabricanteDao = new FabricanteDao(em);
 
 		em.getTransaction().begin();
-		List<Produto> buscarTodos = produtoDao.buscarTodos();
-		buscarTodos.forEach(p2 -> System.out.println(p.getPreco()));
+		List<Produto> todos = produtoDao.buscarPorNome("Velho");
+		todos.forEach(p2 -> System.out.println(p.getDescricao()));
+
 		em.getTransaction().commit();
 		em.close();
 

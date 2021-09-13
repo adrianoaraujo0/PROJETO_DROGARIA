@@ -24,7 +24,7 @@ public class ProdutoDao {
 		this.em.remove(produto);
 	}
 
-	public Produto buscarProduto(Long id) {
+	public Produto buscaPorID(Long id) {
 
 		return em.find(Produto.class, id);
 
@@ -33,6 +33,14 @@ public class ProdutoDao {
 	public List<Produto> buscarTodos() {
 		String jpql = "SELECT p FROM Produto p";
 		return em.createQuery(jpql, Produto.class).getResultList();
+	}
+
+	public List<Produto> buscarPorNome(String nome) {
+		String jpql = "SELECT p FROM Produto p WHERE p.descricao = :nome";
+		return em.createQuery(jpql, Produto.class)
+				.setParameter("nome", nome)
+				.getResultList();
+
 	}
 
 }
