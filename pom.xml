@@ -19,6 +19,9 @@
 				</configuration>
 			</plugin>
 		</plugins>
+
+
+
 	</build>
 
 	<dependencies>
@@ -38,7 +41,7 @@
 		<dependency>
 			<groupId>org.primefaces</groupId>
 			<artifactId>primefaces</artifactId>
-			<version>4.0</version>
+			<version>8.0</version>
 		</dependency>
 
 		<dependency>
@@ -56,6 +59,12 @@
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.0.1</version>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.primefaces.themes/ui-lightness -->
+		<!-- https://mvnrepository.com/artifact/org.primefaces.themes/ui-lightness -->
+
+		<!-- https://mvnrepository.com/artifact/org.primefaces.themes/all-themes -->
+		
 
 	</dependencies>
 
