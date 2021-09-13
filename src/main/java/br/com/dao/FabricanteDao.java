@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import br.com.domain.Fabricante;
-import br.com.domain.Produto;
 
 public class FabricanteDao {
 
@@ -29,15 +28,15 @@ public class FabricanteDao {
 	public Fabricante buscarPorId(Long id) {
 		return em.find(Fabricante.class, id);
 	}
-	
-	public List<Fabricante> buscarPorNome(String nome) {
-		String jpql = "SELECT p FROM Fabricante p WHERE p.nome = :nome";
-		return em.createQuery(jpql, Fabricante.class)
-				.setParameter("nome", nome)
-				.getResultList();
 
+	public List<Fabricante> buscarTodos() {
+		String jpql = "SELECT p FROM Fabricante";
+		return em.createQuery(jpql, Fabricante.class).getResultList();
 	}
 
-	
-	
+	public List<Fabricante> buscarPorNome(String nome) {
+		String jpql = "SELECT p FROM Fabricante p WHERE p.descricao = :nome";
+		return em.createQuery(jpql, Fabricante.class).setParameter("nome", nome).getResultList();
+
+	}
 }

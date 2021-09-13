@@ -21,10 +21,14 @@ public class Produto {
 
 	@ManyToOne
 	@JoinColumn(name = "fabricante_produto")
-	Fabricante fabricante;
+	private Fabricante fabricante;
 
 	public Produto() {
 
+	}
+
+	public Produto(String descricao) {
+		this.descricao = descricao;
 	}
 
 	public Produto(String descricao, Long quantidade, Double preco, Fabricante fabricante) {
@@ -73,5 +77,13 @@ public class Produto {
 	public void setFabricante(Fabricante fabricante) {
 		this.fabricante = fabricante;
 	}
+
+	@Override
+	public String toString() {
+		return "Produto [codigo=" + codigo + ", descricao=" + descricao + ", quantidade=" + quantidade + ", preco="
+				+ preco + ", " + fabricante + "]";
+	}
+	
+	
 
 }
