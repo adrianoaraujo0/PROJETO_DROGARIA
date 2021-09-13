@@ -34,5 +34,27 @@ public class ProdutoDao {
 		String jpql = "SELECT p FROM Produto p";
 		return em.createQuery(jpql, Produto.class).getResultList();
 	}
+	
+	public List<Produto> buscarPorNome(String nome) {
+		String jpql = "SELECT p FROM Produto p WHERE p.descricao = :descricao";
+		return em.createQuery(jpql, Produto.class)
+				.setParameter("descricao", nome)
+				.getResultList();
+	}
+	
+	public List<Produto> buscarPorFabricante(String nome) {
+		String jpql = "SELECT p FROM Produto p WHERE p.fabricante.descricao = :descricao";
+		return em.createQuery(jpql, Produto.class)
+				.setParameter("descricao", nome)
+				.getResultList();
+	}
+	
+	public Double buscarPrecoPorNomeDoProduto(String nome) {
+		String jpql = "SELECT p.preco FROM Produto p WHERE p.descricao = :preco";
+		return em.createQuery(jpql, Double.class)
+				.setParameter("preco", nome)
+				.getSingleResult();
+	}
+
 
 }

@@ -43,5 +43,10 @@ public class Fabricante {
 		this.descricao = descricao;
 	}
 
+	@Override
+	public String toString() {
+		return "Fabricante [codigo=" + codigo + ", descricao=" + descricao + "]";
+	}
+
 	
 }
