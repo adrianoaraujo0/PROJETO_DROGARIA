@@ -26,13 +26,22 @@ public class Program {
 		
 		List<Fabricante> buscarF = fabricanteDao.buscarPorNome("");
 		buscarF.forEach(p2 -> System.out.println("Nome: " + f.getDescricao()));
-		*/
+		
 		
 		List<Produto> buscar = produtoDao.buscarPorFabricante("SAO LUIZ");
 		buscar.forEach(p2 -> System.out.println(buscar));
 		
 		Double pesquisa = produtoDao.buscarPrecoPorNomeDoProduto("Velho");
 		System.out.println("Preço: " + pesquisa);
+		
+		*/
+		
+
+		List<Fabricante> lista =  fabricanteDao.Listar();
+		System.out.println(lista);
+		
+		List<Produto> listap = produtoDao.Listar();
+		System.out.println(listap);
 		em.getTransaction().commit();
 		em.close();
 

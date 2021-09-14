@@ -80,8 +80,9 @@ public class Produto {
 
 	@Override
 	public String toString() {
-		return "Produto [codigo=" + codigo + ", descricao=" + descricao + ", quantidade=" + quantidade + ", preco="
-				+ preco + ", " + fabricante + "]";
+		return "\nProduto :codigo = " + codigo +
+				", descricao = " + descricao + ", quantidade = " + quantidade + 
+				", preco = " + preco + ", fabricante = " + fabricante;
 	}
 	
 	

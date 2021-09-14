@@ -45,7 +45,7 @@ public class Fabricante {
 
 	@Override
 	public String toString() {
-		return "Fabricante [codigo=" + codigo + ", descricao=" + descricao + "]";
+		return "\ncodigo = " + codigo + ", descricao = " + descricao;
 	}
 
 	

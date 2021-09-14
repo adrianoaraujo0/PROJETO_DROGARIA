@@ -10,6 +10,10 @@ public class FabricanteDao {
 
 	private EntityManager em;
 
+	public FabricanteDao() {
+
+	}
+	
 	public FabricanteDao(EntityManager em) {
 
 		this.em = em;
@@ -37,6 +41,11 @@ public class FabricanteDao {
 	public List<Fabricante> buscarPorNome(String nome) {
 		String jpql = "SELECT p FROM Fabricante p WHERE p.descricao = :nome";
 		return em.createQuery(jpql, Fabricante.class).setParameter("nome", nome).getResultList();
-
+	}
+	
+	public List<Fabricante> Listar() {
+		String jpql = "SELECT p FROM Fabricante p ORDER BY"
+				+ " p.descricao ASC";
+		return em.createQuery(jpql, Fabricante.class).getResultList();
 	}
 }
