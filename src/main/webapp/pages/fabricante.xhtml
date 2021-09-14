@@ -12,19 +12,33 @@
 	</ui:define>
 
 	<ui:define name="conteudo">
-		<p:dataTable emptyMessage="Nenhum registro encontrado."
-			value="#{MBFabricante.fabricantes}" 
-			var="item">
-			
-			<p:column headerText="Código">
-				<h:outputText value="#{item.codigo}"/>
-			</p:column>
 
-			<p:column headerText="Descrição">
-				<h:outputText value="#{item.descricao}"/>
-			</p:column>
+		<h:form>
+			<p:dataTable emptyMessage="Nenhum registro encontrado."
+				value="#{MBFabricante.fabricantes}" var="item" paginator="true"
+				rows="10">
 
-		</p:dataTable>
+				<p:column headerText="Código" sortBy="#{item.codigo}"
+					filterBy="#{item.codigo}">
+					<h:outputText value="#{item.codigo}" />
+				</p:column>
+
+				<p:column headerText="Descrição" sortBy="#{item.descricao}"
+					filterBy="#{item.descricao}">
+					<h:outputText value="#{item.descricao}" />
+				</p:column>
+
+			</p:dataTable>
+		</h:form>
+		
+		<p:dialog widgetVar="dlgFabNovo" closable="false"
+			draggable="false" resizable="false">
+			<h:form>
+				<h:panelGrid columns="2">
+					
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
 	</ui:define>
 
 </ui:composition>
