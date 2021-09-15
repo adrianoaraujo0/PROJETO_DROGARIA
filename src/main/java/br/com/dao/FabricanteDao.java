@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import br.com.domain.Fabricante;
+import br.com.util.JPAUtil;
 
 public class FabricanteDao {
 
@@ -15,13 +16,15 @@ public class FabricanteDao {
 	}
 	
 	public FabricanteDao(EntityManager em) {
-
+		
 		this.em = em;
 	}
 
 	public void cadastrar(Fabricante fabricante) {
-
+		em.getTransaction().begin();
 		em.persist(fabricante);
+		em.getTransaction().commit();
+		em.close();
 	}
 
 	public void remover(Fabricante fabricante) {

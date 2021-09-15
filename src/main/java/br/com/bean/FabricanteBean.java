@@ -16,6 +16,7 @@ import br.com.util.JPAUtil;
 @ViewScoped
 public class FabricanteBean {
 
+	private Fabricante fabricante; //FALAR COM O CHICO
 	private ListDataModel<Fabricante> fabricantes;
 
 	public ListDataModel<Fabricante> getFabricantes() {
@@ -26,7 +27,15 @@ public class FabricanteBean {
 		this.fabricantes = fabricantes;
 	}
 
-	@PostConstruct
+	public Fabricante getFabricante() {
+		return fabricante;
+	}
+
+	public void setFabricante(Fabricante fabricante) {
+		this.fabricante = fabricante;
+	}
+
+	@PostConstruct  //é carregado ao iniciar da pag
 	public void prepararLista() {
 		try {
 			EntityManager em = JPAUtil.getEntityManager();
@@ -38,5 +47,21 @@ public class FabricanteBean {
 			e.printStackTrace();
 		}
 
+	}
+
+	public void prepararNovo() {
+		fabricante = new Fabricante();
+	}
+	
+	public void novo() {
+		try {
+			EntityManager em = JPAUtil.getEntityManager();
+			FabricanteDao dao = new FabricanteDao(em);
+			dao.cadastrar(fabricante);
+			
+			prepararLista();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
