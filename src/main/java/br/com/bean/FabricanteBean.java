@@ -8,15 +8,18 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.model.ListDataModel;
 import javax.persistence.EntityManager;
 
+import org.postgresql.util.PSQLException;
+
 import br.com.dao.FabricanteDao;
 import br.com.domain.Fabricante;
 import br.com.util.JPAUtil;
+import br.com.util.JSFUtil;
 
 @ManagedBean(name = "MBFabricante")
 @ViewScoped
 public class FabricanteBean {
 
-	private Fabricante fabricante; //FALAR COM O CHICO
+	private Fabricante fabricante; // FALAR COM O CHICO
 	private ListDataModel<Fabricante> fabricantes;
 
 	public ListDataModel<Fabricante> getFabricantes() {
@@ -35,7 +38,7 @@ public class FabricanteBean {
 		this.fabricante = fabricante;
 	}
 
-	@PostConstruct  //é carregado ao iniciar da pag
+	@PostConstruct // é carregado ao iniciar da pag
 	public void prepararLista() {
 		try {
 			EntityManager em = JPAUtil.getEntityManager();
@@ -45,6 +48,7 @@ public class FabricanteBean {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			JSFUtil.adicionarMensagemErro(e.getMessage());
 		}
 
 	}
@@ -52,16 +56,20 @@ public class FabricanteBean {
 	public void prepararNovo() {
 		fabricante = new Fabricante();
 	}
-	
+
 	public void novo() {
 		try {
 			EntityManager em = JPAUtil.getEntityManager();
 			FabricanteDao dao = new FabricanteDao(em);
 			dao.cadastrar(fabricante);
-			
+
 			prepararLista();
+
+			JSFUtil.adicionarMensagemSucesso("Fabricante salvo com sucesso.");
 		} catch (Exception e) {
 			e.printStackTrace();
+			JSFUtil.adicionarMensagemErro(e.getMessage());
 		}
+
 	}
 }
