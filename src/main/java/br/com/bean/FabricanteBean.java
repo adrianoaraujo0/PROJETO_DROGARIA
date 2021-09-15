@@ -19,7 +19,7 @@ import br.com.util.JSFUtil;
 @ViewScoped
 public class FabricanteBean {
 
-	private Fabricante fabricante; // FALAR COM O CHICO
+	private Fabricante fabricante; 
 	private ListDataModel<Fabricante> fabricantes;
 
 	public ListDataModel<Fabricante> getFabricantes() {
@@ -72,4 +72,24 @@ public class FabricanteBean {
 		}
 
 	}
+
+	public void prepararExcluir() {
+		fabricante = fabricantes.getRowData();
+	}
+	
+	public void excluir() {
+		try {
+			EntityManager em = JPAUtil.getEntityManager();
+			FabricanteDao dao = new FabricanteDao(em);
+			dao.remover(fabricante);
+
+			prepararLista();
+
+			JSFUtil.adicionarMensagemSucesso("Removido com sucesso");
+		} catch (Exception e) {
+			e.printStackTrace();
+			JSFUtil.adicionarMensagemErro(e.getMessage());
+		}
+	}
+
 }

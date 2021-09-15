@@ -14,13 +14,14 @@ public class FabricanteDao {
 	public FabricanteDao() {
 
 	}
-	
+
 	public FabricanteDao(EntityManager em) {
-		
+
 		this.em = em;
 	}
 
 	public void cadastrar(Fabricante fabricante) {
+		
 		em.getTransaction().begin();
 		em.persist(fabricante);
 		em.getTransaction().commit();
@@ -28,8 +29,12 @@ public class FabricanteDao {
 	}
 
 	public void remover(Fabricante fabricante) {
+		
+		em.getTransaction().begin();
 		fabricante = em.merge(fabricante);
 		this.em.remove(fabricante);
+		em.getTransaction().commit();
+		em.close();
 	}
 
 	public Fabricante buscarPorId(Long id) {
@@ -45,10 +50,9 @@ public class FabricanteDao {
 		String jpql = "SELECT p FROM Fabricante p WHERE p.descricao = :nome";
 		return em.createQuery(jpql, Fabricante.class).setParameter("nome", nome).getResultList();
 	}
-	
+
 	public List<Fabricante> Listar() {
-		String jpql = "SELECT p FROM Fabricante p ORDER BY"
-				+ " p.descricao ASC";
+		String jpql = "SELECT p FROM Fabricante p ORDER BY" + " p.descricao ASC";
 		return em.createQuery(jpql, Fabricante.class).getResultList();
 	}
 }
