@@ -34,6 +34,7 @@ public class FabricanteBean {
 		return fabricante;
 	}
 
+	
 	public void setFabricante(Fabricante fabricante) {
 		this.fabricante = fabricante;
 	}
@@ -41,10 +42,12 @@ public class FabricanteBean {
 	@PostConstruct // é carregado ao iniciar da pag
 	public void prepararLista() {
 		try {
-			EntityManager em = JPAUtil.getEntityManager();
-			FabricanteDao dao = new FabricanteDao(em);
-			List<Fabricante> lista = dao.Listar();
-			fabricantes = new ListDataModel<Fabricante>(lista);
+			while(true) {
+				EntityManager em = JPAUtil.getEntityManager();
+				FabricanteDao dao = new FabricanteDao(em);
+				List<Fabricante> lista = dao.Listar();
+				fabricantes = new ListDataModel<Fabricante>(lista);				
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
