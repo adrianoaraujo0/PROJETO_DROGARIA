@@ -20,8 +20,16 @@ public class FabricanteDao {
 		this.em = em;
 	}
 
+	public void merge(Fabricante fabricante) {
+		em.getTransaction().begin();
+		em.merge(fabricante);
+		em.getTransaction().commit();
+		em.close();
+
+	}
+
 	public void cadastrar(Fabricante fabricante) {
-		
+
 		em.getTransaction().begin();
 		em.persist(fabricante);
 		em.getTransaction().commit();
@@ -29,12 +37,22 @@ public class FabricanteDao {
 	}
 
 	public void remover(Fabricante fabricante) {
-		
+
 		em.getTransaction().begin();
 		fabricante = em.merge(fabricante);
 		this.em.remove(fabricante);
 		em.getTransaction().commit();
 		em.close();
+	}
+
+	public List<Fabricante> editar(Long id) {
+
+		EntityManager em = JPAUtil.getEntityManager();
+		this.em = em;
+		
+		String jpql = "SELECT p FROM Fabricante p WHERE p.id = :id";
+		return em.createQuery(jpql, Fabricante.class).setParameter("id", id).getResultList();
+
 	}
 
 	public Fabricante buscarPorId(Long id) {
@@ -54,5 +72,6 @@ public class FabricanteDao {
 	public List<Fabricante> Listar() {
 		String jpql = "SELECT p FROM Fabricante p ORDER BY" + " p.descricao ASC";
 		return em.createQuery(jpql, Fabricante.class).getResultList();
+		
 	}
 }

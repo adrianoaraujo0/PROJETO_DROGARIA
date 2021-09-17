@@ -17,10 +17,27 @@ public class Program {
 		Fabricante f = new Fabricante();
 		Produto p = new Produto("AÇAI");
 
+		
+		//FabricanteBean bean = new FabricanteBean();
+		 
+		
+
 		EntityManager em = JPAUtil.getEntityManager();
-		ProdutoDao produtoDao = new ProdutoDao(em);
-		FabricanteDao fabricanteDao = new FabricanteDao(em);
-		FabricanteBean bean = new FabricanteBean();
+		FabricanteDao dao = new FabricanteDao(em);
+		
+		List<Fabricante> lista = dao.editar(27l);
+		f.setDescricao("FAB27");
+		
+		for(Fabricante x : lista) {
+			x.setDescricao("BEM 10");
+			dao.merge(x);
+			System.out.println("DEU ROXEDA");
+		}
+		
+		
+//		Fabricante alterar = dao.buscarPorId(27l);
+//		alterar.setDescricao("ALTERAR");
+//		dao.merge(alterar);
 
 		/*List<Produto> buscar = produtoDao.buscarPorNome("");
 		buscar.forEach(p2 -> System.out.println("Preço: " + p.getPreco() + ", Descrição: " + p.getDescricao()));
@@ -41,7 +58,7 @@ public class Program {
 		System.out.println(listap);
 		*/
 		
-		bean.excluir();
+	
 		
 		
 
