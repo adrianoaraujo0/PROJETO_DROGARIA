@@ -1,5 +1,6 @@
 package br.com.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -75,13 +76,13 @@ public class FabricanteDao {
 		return em.createQuery(jpql, Fabricante.class).setParameter("nome", nome).getResultList();
 	}
 
-	public List<Fabricante> Listar() {
+	public ArrayList<Fabricante> Listar() {
 		
 		EntityManager em = JPAUtil.getEntityManager();
 		this.em = em;
 
 		String jpql = "SELECT p FROM Fabricante p ORDER BY" + " p.descricao ASC";
-		return em.createQuery(jpql, Fabricante.class).getResultList();
+		return (ArrayList<Fabricante>) em.createQuery(jpql, Fabricante.class).getResultList();
 
 	}
 }

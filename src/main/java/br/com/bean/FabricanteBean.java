@@ -1,18 +1,13 @@
 package br.com.bean;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.model.ListDataModel;
-import javax.persistence.EntityManager;
-
-import org.postgresql.util.PSQLException;
 
 import br.com.dao.FabricanteDao;
 import br.com.domain.Fabricante;
-import br.com.util.JPAUtil;
 import br.com.util.JSFUtil;
 
 @ManagedBean(name = "MBFabricante")
@@ -20,15 +15,8 @@ import br.com.util.JSFUtil;
 public class FabricanteBean {
 
 	private Fabricante fabricante;
-	private ListDataModel<Fabricante> fabricantes;
-
-	public ListDataModel<Fabricante> getFabricantes() {
-		return fabricantes;
-	}
-
-	public void setFabricantes(ListDataModel<Fabricante> fabricantes) {
-		this.fabricantes = fabricantes;
-	}
+	private ArrayList<Fabricante> fabricantes;
+	private ArrayList<Fabricante> fabricantesFiltrados;
 
 	public Fabricante getFabricante() {
 		return fabricante;
@@ -38,13 +26,27 @@ public class FabricanteBean {
 		this.fabricante = fabricante;
 	}
 
+	public ArrayList<Fabricante> getFabricantes() {
+		return fabricantes;
+	}
+
+	public void setFabricantes(ArrayList<Fabricante> fabricantes) {
+		this.fabricantes = fabricantes;
+	}
+
+	public ArrayList<Fabricante> getFabricantesFiltrados() {
+		return fabricantesFiltrados;
+	}
+
+	public void setFabricantesFiltrados(ArrayList<Fabricante> fabricantesFiltrados) {
+		this.fabricantesFiltrados = fabricantesFiltrados;
+	}
+
 	@PostConstruct // é carregado ao iniciar da pag
 	public void prepararLista() {
 		try {
 			FabricanteDao dao = new FabricanteDao();
-
-			List<Fabricante> lista = dao.Listar();
-			fabricantes = new ListDataModel<Fabricante>(lista);
+			fabricantes = dao.Listar();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -63,7 +65,7 @@ public class FabricanteBean {
 
 			dao.cadastrar(fabricante);
 
-			prepararLista();
+			fabricantes = dao.Listar();
 
 			JSFUtil.adicionarMensagemSucesso("Fabricante salvo com sucesso.");
 		} catch (Exception e) {
@@ -73,17 +75,14 @@ public class FabricanteBean {
 
 	}
 
-	public void prepararExcluir() {
-		fabricante = fabricantes.getRowData();
-	}
-
 	public void excluir() {
 		try {
 			FabricanteDao dao = new FabricanteDao();
 
 			dao.remover(fabricante);
 
-			prepararLista();
+			fabricantes = dao.Listar();
+			//= new ArrayList<Fabricante>(dao.Listar());
 
 			JSFUtil.adicionarMensagemSucesso("Removido com sucesso");
 		} catch (Exception e) {
@@ -92,19 +91,14 @@ public class FabricanteBean {
 		}
 	}
 
-	public void prepararEditar() {
-		fabricante = fabricantes.getRowData();
-
-	}
 
 	public void editar() {
 		try {
 
 			FabricanteDao dao = new FabricanteDao();
-			List<Fabricante> lista = dao.editar(fabricante.getCodigo());
+			fabricantes = dao.Listar();
 
 			dao.merge(fabricante);
-			System.out.println(fabricante);
 
 			JSFUtil.adicionarMensagemSucesso("ALTERADO COM SUCESSO");
 		} catch (Exception e) {
