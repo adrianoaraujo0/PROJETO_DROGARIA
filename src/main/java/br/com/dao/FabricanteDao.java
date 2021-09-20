@@ -30,6 +30,9 @@ public class FabricanteDao {
 
 	public void cadastrar(Fabricante fabricante) {
 
+		EntityManager em = JPAUtil.getEntityManager();
+		this.em = em;
+		
 		em.getTransaction().begin();
 		em.persist(fabricante);
 		em.getTransaction().commit();
@@ -38,6 +41,9 @@ public class FabricanteDao {
 
 	public void remover(Fabricante fabricante) {
 
+		EntityManager em = JPAUtil.getEntityManager();
+		this.em = em;
+		
 		em.getTransaction().begin();
 		fabricante = em.merge(fabricante);
 		this.em.remove(fabricante);
@@ -49,7 +55,7 @@ public class FabricanteDao {
 
 		EntityManager em = JPAUtil.getEntityManager();
 		this.em = em;
-		
+
 		String jpql = "SELECT p FROM Fabricante p WHERE p.id = :id";
 		return em.createQuery(jpql, Fabricante.class).setParameter("id", id).getResultList();
 
@@ -70,8 +76,12 @@ public class FabricanteDao {
 	}
 
 	public List<Fabricante> Listar() {
+		
+		EntityManager em = JPAUtil.getEntityManager();
+		this.em = em;
+
 		String jpql = "SELECT p FROM Fabricante p ORDER BY" + " p.descricao ASC";
 		return em.createQuery(jpql, Fabricante.class).getResultList();
-		
+
 	}
 }

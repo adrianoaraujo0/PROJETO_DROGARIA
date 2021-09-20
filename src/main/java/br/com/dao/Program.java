@@ -25,11 +25,11 @@ public class Program {
 		EntityManager em = JPAUtil.getEntityManager();
 		FabricanteDao dao = new FabricanteDao(em);
 		
-		List<Fabricante> lista = dao.editar(27l);
-		f.setDescricao("FAB27");
+		List<Fabricante> lista = dao.editar(61l);
+		//f.setDescricao("FAB27");
 		
 		for(Fabricante x : lista) {
-			x.setDescricao("BEM 10");
+			x.setDescricao("BEM 1");
 			dao.merge(x);
 			System.out.println("DEU ROXEDA");
 		}

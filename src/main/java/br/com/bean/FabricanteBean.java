@@ -41,8 +41,7 @@ public class FabricanteBean {
 	@PostConstruct // é carregado ao iniciar da pag
 	public void prepararLista() {
 		try {
-			EntityManager em = JPAUtil.getEntityManager();
-			FabricanteDao dao = new FabricanteDao(em);
+			FabricanteDao dao = new FabricanteDao();
 
 			List<Fabricante> lista = dao.Listar();
 			fabricantes = new ListDataModel<Fabricante>(lista);
@@ -60,8 +59,8 @@ public class FabricanteBean {
 
 	public void novo() {
 		try {
-			EntityManager em = JPAUtil.getEntityManager();
-			FabricanteDao dao = new FabricanteDao(em);
+			FabricanteDao dao = new FabricanteDao();
+
 			dao.cadastrar(fabricante);
 
 			prepararLista();
@@ -80,8 +79,8 @@ public class FabricanteBean {
 
 	public void excluir() {
 		try {
-			EntityManager em = JPAUtil.getEntityManager();
-			FabricanteDao dao = new FabricanteDao(em);
+			FabricanteDao dao = new FabricanteDao();
+
 			dao.remover(fabricante);
 
 			prepararLista();
@@ -89,7 +88,7 @@ public class FabricanteBean {
 			JSFUtil.adicionarMensagemSucesso("Removido com sucesso");
 		} catch (Exception e) {
 			e.printStackTrace();
-			JSFUtil.adicionarMensagemErro(e.getMessage());
+			// JSFUtil.adicionarMensagemErro(e.getMessage());
 		}
 	}
 
@@ -102,15 +101,10 @@ public class FabricanteBean {
 		try {
 
 			FabricanteDao dao = new FabricanteDao();
-			List<Fabricante> alterar = dao.editar(fabricante.getCodigo());
-			
-			dao.editar(fabricante.getCodigo());
+			List<Fabricante> lista = dao.editar(fabricante.getCodigo());
 
-			for(Fabricante x : alterar) {
-				
-				dao.merge(x);
-				
-			}
+			dao.merge(fabricante);
+			System.out.println(fabricante);
 
 			JSFUtil.adicionarMensagemSucesso("ALTERADO COM SUCESSO");
 		} catch (Exception e) {
