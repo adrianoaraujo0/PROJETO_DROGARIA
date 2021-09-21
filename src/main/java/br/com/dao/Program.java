@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import br.com.bean.FabricanteBean;
+import br.com.bean.ProdutoBean;
 import br.com.domain.Fabricante;
 import br.com.domain.Produto;
 import br.com.util.JPAUtil;
@@ -15,52 +16,26 @@ public class Program {
 		// TODO Auto-generated method stub
 
 		Fabricante f = new Fabricante();
-		Produto p = new Produto("AÇAI");
+		f.setCodigo(23l);
 
-		
-		//FabricanteBean bean = new FabricanteBean();
-		 
-		
+		Produto p = new Produto("Velho", 11l, 20.0, f);
+		Produto edita = new Produto();
+		edita.setCodigo(14l);
+		edita.setDescricao("Novo");
+		ProdutoBean bean = new ProdutoBean();
+//		EntityManager em = JPAUtil.getEntityManager();
+		ProdutoDao dao = new ProdutoDao();
 
-		EntityManager em = JPAUtil.getEntityManager();
-		FabricanteDao dao = new FabricanteDao(em);
+//		bean.cadastrar(p);
 		
-		List<Fabricante> lista = dao.editar(61l);
-		//f.setDescricao("FAB27");
+//		bean.alterar(edita);
 		
-		for(Fabricante x : lista) {
-			x.setDescricao("BEM 1");
-			dao.merge(x);
-			System.out.println("DEU ROXEDA");
-		}
-		
-		
-//		Fabricante alterar = dao.buscarPorId(27l);
-//		alterar.setDescricao("ALTERAR");
-//		dao.merge(alterar);
-
-		/*List<Produto> buscar = produtoDao.buscarPorNome("");
-		buscar.forEach(p2 -> System.out.println("Preço: " + p.getPreco() + ", Descrição: " + p.getDescricao()));
-		
-		List<Fabricante> buscarF = fabricanteDao.buscarPorNome("");
-		buscarF.forEach(p2 -> System.out.println("Nome: " + f.getDescricao()));
-		
-		
-		List<Produto> buscar = produtoDao.buscarPorFabricante("SAO LUIZ");
-		buscar.forEach(p2 -> System.out.println(buscar));
-		
-		Double pesquisa = produtoDao.buscarPrecoPorNomeDoProduto("Velho");
-		System.out.println("Preço: " + pesquisa);
-		List<Fabricante> lista =  fabricanteDao.Listar();
+		List<Produto> lista = dao.ListarFabricanteProduto();
 		System.out.println(lista);
 		
-		List<Produto> listap = produtoDao.Listar();
-		System.out.println(listap);
-		*/
-		
-	
-		
-		
+		for(Produto x : lista) {
+			System.out.println(x);
+		}
 
 	}
 

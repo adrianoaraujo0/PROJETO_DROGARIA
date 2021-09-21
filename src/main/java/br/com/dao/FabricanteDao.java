@@ -17,7 +17,6 @@ public class FabricanteDao {
 	}
 
 	public FabricanteDao(EntityManager em) {
-
 		this.em = em;
 	}
 

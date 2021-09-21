@@ -3,8 +3,15 @@
 	xmlns="http://java.sun.com/xml/ns/javaee"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
+	
+	
 	<display-name>primefaces</display-name>
 
+	<welcome-file-list>
+		<welcome-file>faces/pages/principal.xhtml</welcome-file>
+	</welcome-file-list>
+	
+	
 	<context-param>
 		<param-name>primefaces.THEME</param-name>
 		<param-value>ui-darkness</param-value>
