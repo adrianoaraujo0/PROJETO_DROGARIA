@@ -8,11 +8,45 @@
 	template="/templates/modeloSistema.xhtml">
 
 	<ui:define name="menu">
-		<ui:include src="/includes/menuPrincipal.xhtml"/>
+		<ui:include src="/includes/menuPrincipal.xhtml" />
 	</ui:define>
-	
-	
+
+
 	<ui:define name="conteudo">
+		<f:event listener="#{MBProduto.carregarListagem}" type="preRenderView"/>
+	
+		<h:form id="frmProListagem">
+			<p:dataTable id="tblProdListagem"
+						value="#{MBProduto.produtos}" var="item"
+						emptyMessage="Nenhum registro encontrado"
+						paginator="true" rows="8">
+				
+				<f:facet name="Header">
+					<h:outputText value="Produto - Listagem"/>
+				</f:facet>
+				
+				<p:column headerText="Código">
+					<h:outputText value="#{item.codigo}"/>
+				</p:column>
+				
+				<p:column headerText="Descrição">
+					<h:outputText value="#{item.descricao}"/>
+				</p:column>
+				
+				<p:column headerText="Preço">
+					<h:outputText value="#{item.preco}"/>
+				</p:column>
+				
+				<p:column headerText="Qtde.">
+						<h:outputText value="#{item.quantidade}"/>
+				</p:column>
+				
+				<p:column headerText="Fabricante">
+					<h:outputText value="#{item.fabricante.descricao}"/>
+					
+				</p:column>
+			</p:dataTable>
+		</h:form>
 	</ui:define>
 
 </ui:composition>
