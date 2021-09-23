@@ -48,5 +48,4 @@ public class Fabricante {
 		return "\ncodigo = " + codigo + ", descricao = " + descricao;
 	}
 
-	
 }

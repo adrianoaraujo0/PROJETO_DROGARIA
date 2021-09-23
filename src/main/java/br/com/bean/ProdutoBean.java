@@ -69,8 +69,11 @@ public class ProdutoBean {
 
 	public void prepararNovo() {
 		try {
+
 			this.produto = new Produto();
+
 			FabricanteDao dao = new FabricanteDao();
+
 			comboFabricantes = dao.Listar();
 
 		} catch (Exception e) {
@@ -81,6 +84,7 @@ public class ProdutoBean {
 
 	public void carregarListagem() {
 		try {
+
 			produtos = dao.ListarFabricanteProduto();
 
 			// JSFUtil.adicionarMensagemSucesso("");
@@ -118,5 +122,31 @@ public class ProdutoBean {
 			e.printStackTrace();
 			// JSFUtil.adicionarMensagemErro(e.getMessage());
 		}
+	}
+
+	public void prepararEditar() {
+
+		this.produto = new Produto();
+
+		FabricanteDao dao = new FabricanteDao();
+
+		comboFabricantes = dao.Listar();
+
+	}
+
+	public void editar() {
+		try {
+
+			ProdutoDao dao = new ProdutoDao();
+			dao.editar(produto);
+
+			produtos = dao.ListarFabricanteProduto();
+
+			JSFUtil.adicionarMensagemSucesso("EDITADO!!");
+		} catch (Exception e) {
+			e.printStackTrace();
+			JSFUtil.adicionarMensagemErro(e.getMessage());
+		}
+
 	}
 }
