@@ -21,7 +21,7 @@ public class Produto {
 
 	@ManyToOne
 	@JoinColumn(name = "fabricante_produto")
-	private Fabricante fabricante;
+	private Fabricante fabricante = new Fabricante();
 
 	public Produto() {
 
