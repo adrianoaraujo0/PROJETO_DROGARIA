@@ -17,12 +17,14 @@ public class Program {
 
 		EntityManager em = JPAUtil.getEntityManager();
 		
-		Fabricante f = new Fabricante("TESTE");
-		Fabricante faca = em.merge(f);
+		Fabricante f = new Fabricante("10 DE MAIO");
+		Fabricante faca = new Fabricante("CAREFUL");
 		
+		em.merge(f);
 
 		em.getTransaction().begin();
-		em.merge(faca);
+		faca = f;
+	
 		em.getTransaction().commit();
 		em.close();
 
